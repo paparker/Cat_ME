@@ -11,8 +11,7 @@ library(kableExtra)
 source("R/functions.R")
 
 
-cps <- read_csv('Data/cps_2008_2016_v2.csv')
-cps16 <- cps %>% filter(year==2016)
+cps16 <- read_csv('Data/cps_2016_v2.csv')
 cps16$entryc[is.na(cps16$entryc)] <- 0
 cps16 <- cps16 %>% mutate(inscov = as.factor(inscov),
                           natz = as.factor(natz),
@@ -71,13 +70,13 @@ modDFPostN <- data.frame(Coefficient=colnames(xSamp),
 ##### TABLES #####
 modDFPost[,-1] <- round(modDFPost[,-1], 3)
 modDFPost %>%
-  kbl(caption="Post-ACA model summary of estimated health insurance regression coefficients using 2016 CPS data.",
+  kbl(caption="Mixture model summary of estimated health insurance regression coefficients using 2016 CPS data.",
       format="latex",
       col.names = c("Coefficient", "Posterior Mean", "Standard Error", "2.5%", "97.5%"))
 
 modDFPostN[,-1] <- round(modDFPostN[,-1], 3)
 modDFPostN %>%
-  kbl(caption="Post-ACA Naive model summary of estimated health insurance regression coefficients using 2016 CPS data.",
+  kbl(caption="Naive model summary of estimated health insurance regression coefficients using 2016 CPS data.",
       format="latex",
       col.names = c("Coefficient", "Posterior Mean", "Standard Error", "2.5%", "97.5%"))
 
